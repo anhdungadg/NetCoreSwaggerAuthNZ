@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+// For more information on how to implement this, visit https://learn.microsoft.com/en-us/aspnet/core/security/authentication/jwt-authn?view=aspnetcore-8.0&tabs=windows
 builder.Services.AddAuthentication("Bearer").AddJwtBearer();
 
 builder.Services.AddAuthorization();
