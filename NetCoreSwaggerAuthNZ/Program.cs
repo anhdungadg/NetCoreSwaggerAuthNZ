@@ -66,7 +66,7 @@ app.MapControllers();
 
 app.MapGet("/secret", (ClaimsPrincipal user) => $"Hello, {user.Identity?.Name}!").RequireAuthorization();
 
-//app.UseMiddleware<SwaggerBasicAuthMiddleware>();
+app.UseMiddleware<SwaggerBasicAuthMiddleware>();
 
 // Start the application.
 app.Run();
