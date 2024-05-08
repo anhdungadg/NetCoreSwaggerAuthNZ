@@ -1,3 +1,7 @@
+using NetCoreSwaggerAuthNZ.Infrastructure;
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -27,6 +31,8 @@ app.UseAuthorization();
 
 // Map controllers to the request pipeline.
 app.MapControllers();
+
+app.UseMiddleware<SwaggerBasicAuthMiddleware>();
 
 // Start the application.
 app.Run();
