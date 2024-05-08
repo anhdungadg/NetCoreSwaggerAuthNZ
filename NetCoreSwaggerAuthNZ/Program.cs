@@ -1,10 +1,15 @@
 using NetCoreSwaggerAuthNZ.Infrastructure;
+using System.Security.Claims;
 
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddAuthentication("Bearer").AddJwtBearer();
+
+builder.Services.AddAuthorization();
 
 // Adds controllers to the dependency injection container.
 builder.Services.AddControllers();
@@ -57,7 +62,10 @@ app.UseAuthorization();
 // Map controllers to the request pipeline.
 app.MapControllers();
 
-app.UseMiddleware<SwaggerBasicAuthMiddleware>();
+
+app.MapGet("/secret", (ClaimsPrincipal user) => $"Hello, {user.Identity?.Name}!").RequireAuthorization();
+
+//app.UseMiddleware<SwaggerBasicAuthMiddleware>();
 
 // Start the application.
 app.Run();
