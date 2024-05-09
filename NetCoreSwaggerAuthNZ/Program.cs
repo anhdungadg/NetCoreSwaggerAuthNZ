@@ -64,6 +64,13 @@ app.UseAuthorization();
 app.MapControllers();
 
 
+/// <summary>
+/// This method maps a GET request to "/secret" and returns a greeting message with the user's name.
+/// The user's name is obtained from the ClaimsPrincipal object passed as a parameter.
+/// This endpoint requires authorization.
+/// </summary>
+/// <param name="user">The ClaimsPrincipal object representing the authenticated user.</param>
+/// <returns>A string containing a greeting message with the user's name.</returns>
 app.MapGet("/secret", (ClaimsPrincipal user) => $"Hello, {user.Identity?.Name}!").RequireAuthorization();
 
 app.UseMiddleware<SwaggerBasicAuthMiddleware>();
